@@ -14,7 +14,7 @@ class Instrucao
     const ITAU_6 = '06';// DEVOLVER APÓS 10 DIAS DO VENCIMENTO
     const ITAU_7 = '07';// DEVOLVER APÓS 15 DIAS DO VENCIMENTO
     const ITAU_8 = '08';// DEVOLVER APÓS 20 DIAS DO VENCIMENTO
-    const ITAU_9 = '9';// PROTESTAR
+    const ITAU_9 = '09';// PROTESTAR
     const ITAU_10 = '10';// NÃO PROTESTAR (inibe protesto, quando houver instrução permanente na conta corrente)
     const ITAU_11 = '11';// DEVOLVER APÓS 25 DIAS DO VENCIMENTO
     const ITAU_12 = '12';// DEVOLVER APÓS 35 DIAS DO VENCIMENTO
