@@ -182,7 +182,22 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->cep = str_replace('-', '', $boleto['sacado_cep']);
             $detalhe->cidade = $this->prepareText($boleto['sacado_cidade']);
             $detalhe->estado = $boleto['sacado_uf'];
-            $detalhe->sacador = $this->prepareText($this->configuracao['nome_fantasia']);
+
+            switch ($this->codigo_banco) {
+                // instruções de sobrescrita
+                case \Cnab\Banco::ITAU:
+                    // instrucoes que mudam o funcionamento
+                    $instrucoes = [\Cnab\Instrucao::ITAU_93, \Cnab\Instrucao::ITAU_94];
+                    if (in_array($detalhe->instrucao1, $instrucoes) or in_array($detalhe->instrucao2, $instrucoes)) {
+                        if (isset($boleto['sacador'])) {
+                            $detalhe->sacador = $this->prepareText($boleto['sacador']);
+                            break;
+                        }
+                    }
+                default:
+                    $detalhe->sacador = $this->prepareText($this->configuracao['nome_fantasia']);
+                    break;
+            }
 
             $detalhe->juros_um_dia = $boleto['juros_de_um_dia'];
             $detalhe->desconto_ate = $boleto['data_desconto'];
